@@ -13,6 +13,7 @@ interface Device {
 interface AppUser {
   id: string;
   email: string;
+  display_name: string | null;
   tier: string;
   status: string;
 }
@@ -32,6 +33,7 @@ export function AppUserRow({ user, devices }: { user: AppUser; devices: Device[]
 
   return (
     <tr className="border-t border-zinc-800 align-top">
+      <td className="px-4 py-2">{user.display_name || "—"}</td>
       <td className="px-4 py-2">{user.email}</td>
       <td className="px-4 py-2">
         <select
