@@ -23,13 +23,20 @@ version control ships in M-A1; licensing in M-A2.
 2. Sign in once with your email (any password — this creates the auth user).
 3. `node scripts/seed-owner.mjs you@example.com` → promotes to `owner`.
 
-## 3. Vercel deploy
+## 3. Deploy (Render, free)
 
-1. Push this repo to GitHub (`gh repo create skytech45/swiftfetch-admin --public --source=. --push`).
-2. https://vercel.com/new → Import the repo (framework preset: Next.js).
-3. Environment Variables (Production + Preview): `NEXT_PUBLIC_SUPABASE_URL`,
-   `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`.
-4. Deploy. Point your domain when ready.
+1. Push this repo to GitHub (already at `skytech45/swiftfetch-admin`).
+2. https://dashboard.render.com → New → **Blueprint** → select the repo
+   (`render.yaml` wires build/start/health check automatically).
+3. Service → Environment → add the same 3 values as `.env.local`:
+   `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`,
+   `SUPABASE_SERVICE_ROLE_KEY`.
+4. Deploy. Free tier sleeps after ~15 min idle (first load after sleep
+   takes ~60 s); optional: a free UptimeRobot HTTP ping every 10 min
+   keeps it warm.
+
+(Vercel also works — same 3 env vars + redeploy — but needs a paid plan
+for commercial use.)
 
 ## 4. Scripts
 
