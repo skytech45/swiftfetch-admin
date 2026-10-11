@@ -15,7 +15,8 @@ services:
     environment:
       - NODE_ENV=production
     ports:
-      - "3000:3000"
+      # Host 3000 is commonly taken — serves on 8080.
+      - "8080:3000"
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://localhost:3000/login"]
