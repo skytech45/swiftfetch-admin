@@ -1,0 +1,25 @@
+# SwiftFetch Admin on any Docker host with this repo + a `.env` file:
+#   NEXT_PUBLIC_SUPABASE_URL=...
+#   NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+#   SUPABASE_SERVICE_ROLE_KEY=...
+# Run: `docker compose up -d --build` — serves on port 3000.
+services:
+  admin:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://localhost:3000/login"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
